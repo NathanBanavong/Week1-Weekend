@@ -12,14 +12,14 @@
         style="@style/DisplayTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0" />
+        android:text="" />
 
     <TextView
         android:id="@+id/DisplayAnswer"
         style="@style/DisplayTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DISPLAY ANSWER"/>
+        android:text=""/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 style="@style/operationButtonTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="X" />
+                android:text="*" />
 
         </TableRow>
 

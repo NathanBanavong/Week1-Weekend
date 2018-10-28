@@ -6,20 +6,20 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--will display the inputed information-->
+    <!--will display the input information-->
     <TextView
         android:id="@+id/DisplayHeader"
         style="@style/DisplayTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0" />
+        android:text="" />
 
     <TextView
         android:id="@+id/DisplayAnswer"
         style="@style/DisplayTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 style="@style/operationButtonTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="X" />
+                android:text="*" />
 
         </TableRow>
 
@@ -159,6 +159,7 @@
 
         <!-- Buttons: '-/+', 0, '.', = -->
         <TableRow>
+
             <Button
                 android:id="@+id/btn_negative"
                 style="@style/numButtonTheme"
@@ -190,6 +191,5 @@
         </TableRow>
 
     </TableLayout>
-
 
 </LinearLayout>
