@@ -15,10 +15,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     TextView DisplayHeader;
     TextView DisplayAnswer;
     Button btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9;
-    Button btn_clear, btn_add, btn_sub, btn_div, btn_mult, btn_equal, btn_frac, btn_rec;
+    Button btn_clear, btn_add, btn_sub, btn_div, btn_mult, btn_equal, btn_frac, btn_pie;
 
     double num1, num2;
-    boolean op_add, op_sub, op_div, op_mult, op_frac, op_rec;       //decide if input number is new value
+    boolean op_add, op_sub, op_div, op_mult, op_frac, op_pie;       //decide if input number is new value
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn_equal = findViewById(R.id.btn_Equals);
 
         btn_frac = findViewById(R.id.btn_Fraction);
-        btn_rec = findViewById(R.id.btn_Fraction);
+        btn_pie = findViewById(R.id.btn_Pie);
 
         //bind buttons to track press
         btn_0.setOnClickListener(this);
@@ -71,7 +71,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn_equal.setOnClickListener(this);
 
         btn_frac.setOnClickListener(this);
-        btn_rec.setOnClickListener(this);
+        btn_pie.setOnClickListener(this);
 
     }
 
@@ -163,9 +163,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 op_frac = true;
                 break;
 
-            case R.id.btn_Reciprocate:
-                DisplayHeader.setText(inputDisplay);
-                op_rec = true;
+            case R.id.btn_Pie:
+                DisplayHeader.setText(inputDisplay + btn_pie.getText());
+                op_pie = true;
+
 
             case R.id.btn_Equals:
                 clickCalculation((String) DisplayHeader.getText());
@@ -177,8 +178,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void clickCalculation(String text) {
 
         double result = 0.0;
+        double pie = 3.141592659;
         String headDisplay = (String) DisplayHeader.getText();
-        String SplitParts[] = headDisplay.split( "(\\+|-|/|\\*)" );
+        String SplitParts[] = headDisplay.split("(\\+|-|/|\\*)");
 
         num1 = Double.parseDouble(SplitParts[0]);
         num2 = Double.parseDouble(SplitParts[1]);
@@ -210,14 +212,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //DisplayHeader.setText(text);
             DisplayAnswer.setText(output);
             op_frac = false;
-        } else if (op_rec) {
-            String output;
+        } else if (op_pie) {
+            num2 = pie;
+            result = num1 * pie;
             DisplayHeader.setText(text);
-            output = Double.toString(num1) + " / " + Double.toString(num2);
-            DisplayAnswer.setText(output);
+            DisplayAnswer.setText(Double.toString(result));
+            op_pie = false;
+
         }
 
     }
-
 }
 

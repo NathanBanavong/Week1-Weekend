@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--Top row operations: Clear, (), 1/x, /-->
+        <!--Top row operations: Clear, Pie, 1/x, Division/-->
         <TableRow>
 
             <Button
@@ -36,11 +36,11 @@
                 android:text="Clear" />
 
             <Button
-                android:id="@+id/btn_Reciprocate"
+                android:id="@+id/btn_Pie"
                 style="@style/operationButtonTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="X/Y" />
+                android:text="P" />
 
             <Button
                 android:id="@+id/btn_Fraction"
