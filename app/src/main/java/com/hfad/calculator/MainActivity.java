@@ -7,23 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends Activity implements View.OnClickListener {
 
     //create variable
     TextView DisplayHeader;
     TextView DisplayAnswer;
     Button btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9;
-    Button btn_clear, btn_add, btn_sub, btn_div, btn_mult, btn_equal;
+    Button btn_clear, btn_add, btn_sub, btn_div, btn_mult, btn_equal, btn_frac, btn_rec;
 
     double num1, num2;
-    boolean op_add, op_sub, op_div, op_mult;       //decide if input number is new value
+    boolean op_add, op_sub, op_div, op_mult, op_frac, op_rec;       //decide if input number is new value
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //decimalFormat = new DecimalFormat("#.########");
-        //DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         //display
         DisplayHeader = findViewById(R.id.DisplayHeader);
@@ -48,6 +48,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn_mult = findViewById(R.id.btn_Multiply);
         btn_equal = findViewById(R.id.btn_Equals);
 
+        btn_frac = findViewById(R.id.btn_Fraction);
+        btn_rec = findViewById(R.id.btn_Fraction);
+
         //bind buttons to track press
         btn_0.setOnClickListener(this);
         btn_1.setOnClickListener(this);
@@ -66,6 +69,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn_div.setOnClickListener(this);
         btn_mult.setOnClickListener(this);
         btn_equal.setOnClickListener(this);
+
+        btn_frac.setOnClickListener(this);
+        btn_rec.setOnClickListener(this);
 
     }
 
@@ -149,53 +155,66 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 DisplayHeader.setText(inputDisplay + btn_mult.getText());
                 op_mult = true;
                 break;
+
+            //Special Characters
+            //Issues
+            case R.id.btn_Fraction:
+                DisplayHeader.setText(inputDisplay + btn_frac.getText());
+                op_frac = true;
+                break;
+
+            case R.id.btn_Reciprocate:
+                DisplayHeader.setText(inputDisplay);
+                op_rec = true;
+
             case R.id.btn_Equals:
                 clickCalculation((String) DisplayHeader.getText());
                 break;
-
         }
     }
 
     @SuppressLint("NewApi")
     private void clickCalculation(String text) {
-        double result;
 
-        if (op_add == true) {
-            //DisplayHeader.setText(num1 + num2 + "");
-            String[] SplitParts = text.split("\\+");
-            num1 = Double.parseDouble(SplitParts[0]);
-            num2 = Double.parseDouble(SplitParts[1]);
+        double result = 0.0;
+        String headDisplay = (String) DisplayHeader.getText();
+        String SplitParts[] = headDisplay.split( "(\\+|-|/|\\*)" );
+
+        num1 = Double.parseDouble(SplitParts[0]);
+        num2 = Double.parseDouble(SplitParts[1]);
+
+
+        if (op_add) {
             result = num1 + num2;
             DisplayHeader.setText(text);
             DisplayAnswer.setText(Double.toString(result));
             op_add = false;
-        } else if (op_sub == true) {
-            DisplayHeader.setText(num1 - num2 + "");
-            String[] SplitParts = text.split("-");
-            num1 = Double.parseDouble(SplitParts[0]);
-            num2 = Double.parseDouble(SplitParts[1]);
+        } else if (op_sub) {
             result = num1 - num2;
             DisplayHeader.setText(text);
             DisplayAnswer.setText(Double.toString(result));
             op_sub = false;
-        } else if (op_div == true) {
-            DisplayHeader.setText(num1 / num2 + "");
-            String[] SplitParts = text.split("\\/");
-            num1 = Double.parseDouble(SplitParts[0]);
-            num2 = Double.parseDouble(SplitParts[1]);
+        } else if (op_div) {
             result = num1 / num2;
             DisplayHeader.setText(text);
             DisplayAnswer.setText(Double.toString(result));
             op_div = false;
-        } else if (op_mult == true) {
-            DisplayHeader.setText(num1 * num2 + "");
-            String[] SplitParts = text.split("\\*");
-            num1 = Double.parseDouble(SplitParts[0]);
-            num2 = Double.parseDouble(SplitParts[1]);
+        } else if (op_mult) {
             result = num1 * num2;
             DisplayHeader.setText(text);
             DisplayAnswer.setText(Double.toString(result));
             op_mult = false;
+        } else if (op_frac) {
+            String output;
+            output = " 1 / " + Double.toString(num1);
+            //DisplayHeader.setText(text);
+            DisplayAnswer.setText(output);
+            op_frac = false;
+        } else if (op_rec) {
+            String output;
+            DisplayHeader.setText(text);
+            output = Double.toString(num1) + " / " + Double.toString(num2);
+            DisplayAnswer.setText(output);
         }
 
     }
